@@ -19,7 +19,7 @@ export default function PlaylistGrid({ playlists, mood }) {
           <p className="text-white/30 text-sm">{playlists.length} playlists found for you</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
         {playlists.map((playlist) => (
           <PlaylistCard key={playlist.id} playlist={playlist} />
         ))}

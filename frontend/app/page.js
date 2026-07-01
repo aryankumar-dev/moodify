@@ -39,34 +39,34 @@ function HomeContent() {
       <section className="relative overflow-hidden">
         {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-green-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[90vw] max-w-[600px] h-[300px] sm:h-[400px] bg-green-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm text-white/50 mb-6">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-12 text-center">
+          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs sm:text-sm text-white/50 mb-6">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             Hey {firstName}, what's your vibe today?
           </div>
 
-          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-4">
             Music for{" "}
             <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
               every mood
             </span>
           </h1>
-          <p className="text-white/40 text-lg max-w-md mx-auto">
+          <p className="text-white/40 text-base sm:text-lg max-w-md mx-auto">
             Pick how you feel and get Spotify playlists tailored to your moment.
           </p>
         </div>
       </section>
 
       {/* Mood Selector */}
-      <section className="max-w-4xl mx-auto px-6 pb-12">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-12">
         <MoodSelector activeMood={selectedMood} onSelect={handleMoodSelect} loading={loading} />
       </section>
 
       {/* Results */}
-      <section className="max-w-6xl mx-auto px-6 pb-24">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-24">
         {loading && (
           <div className="flex flex-col items-center justify-center py-24 gap-5">
             <div className="relative">

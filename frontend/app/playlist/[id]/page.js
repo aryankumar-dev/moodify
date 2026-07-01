@@ -14,7 +14,7 @@ function PlaylistContent() {
 
   return (
     <div className="min-h-screen bg-[#0d0d0d]">
-      <div className="max-w-3xl mx-auto px-6 py-10">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
 
         <button
           onClick={() => router.back()}
@@ -27,21 +27,21 @@ function PlaylistContent() {
         </button>
 
         {/* Playlist header */}
-        <div className="flex flex-col sm:flex-row gap-6 mb-8 items-start">
+        <div className="flex flex-col sm:flex-row gap-6 mb-8 items-center sm:items-start text-center sm:text-left">
           {image ? (
             <img
               src={image}
               alt={name}
-              className="w-40 h-40 rounded-xl object-cover shadow-2xl shadow-black/60 flex-shrink-0"
+              className="w-32 h-32 sm:w-40 sm:h-40 rounded-xl object-cover shadow-2xl shadow-black/60 flex-shrink-0"
             />
           ) : (
-            <div className="w-40 h-40 rounded-xl bg-[#1a1a1a] flex items-center justify-center flex-shrink-0">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-xl bg-[#1a1a1a] flex items-center justify-center flex-shrink-0">
               <span className="text-5xl">🎵</span>
             </div>
           )}
-          <div className="flex flex-col justify-center gap-2">
+          <div className="flex flex-col justify-center items-center sm:items-start gap-2">
             <p className="text-white/40 text-xs uppercase tracking-widest font-semibold">Playlist</p>
-            <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">{name}</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight">{name}</h1>
             {description && (
               <p
                 className="text-white/50 text-sm max-w-lg leading-relaxed"
@@ -63,11 +63,10 @@ function PlaylistContent() {
         </div>
 
         {/* Spotify embed player — free previews, no API quota */}
-        <div className="rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+        <div className="rounded-2xl overflow-hidden shadow-2xl shadow-black/50 h-[352px] sm:h-[500px]">
           <iframe
             src={`https://open.spotify.com/embed/playlist/${id}?utm_source=generator&theme=0`}
-            width="100%"
-            height="500"
+            className="w-full h-full"
             frameBorder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
