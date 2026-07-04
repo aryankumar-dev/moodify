@@ -1,22 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "../../context/AuthContext";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { loginWithToken } = useAuth();
 
-  const [status, setStatus] = useState("loading"); // loading | success | error
+  const [status, setStatus] = useState("loading");
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const token = searchParams.get("token");
+
     if (!token) {
       setErrorMsg("No verification token found in the link.");
       setStatus("error");
@@ -38,7 +39,7 @@ export default function VerifyEmailPage() {
         setErrorMsg(err.message);
         setStatus("error");
       });
-  }, []);
+  }, [searchParams, router, loginWithToken]);
 
   return (
     <div className="min-h-[calc(100vh-65px)] flex items-center justify-center px-4">
@@ -52,15 +53,21 @@ export default function VerifyEmailPage() {
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold text-white">Verifying your email…</h2>
-            <p className="text-white/40 text-sm mt-2">Please wait a moment.</p>
+            <h2 className="text-xl font-semibold text-white">
+              Verifying your email…
+            </h2>
+            <p className="text-white/40 text-sm mt-2">
+              Please wait a moment.
+            </p>
           </div>
         )}
 
         {status === "success" && (
           <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-10">
             <div className="text-5xl mb-4">🎉</div>
-            <h2 className="text-2xl font-bold text-white mb-2">Email Verified!</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">
+              Email Verified!
+            </h2>
             <p className="text-green-300/80 text-sm mb-6">
               Your account is now active. Redirecting you to the home page…
             </p>
@@ -76,8 +83,11 @@ export default function VerifyEmailPage() {
         {status === "error" && (
           <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-10">
             <div className="text-5xl mb-4">❌</div>
-            <h2 className="text-2xl font-bold text-white mb-2">Verification Failed</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">
+              Verification Failed
+            </h2>
             <p className="text-red-300/80 text-sm mb-6">{errorMsg}</p>
+
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/register"
@@ -85,6 +95,7 @@ export default function VerifyEmailPage() {
               >
                 Back to Register
               </Link>
+
               <Link
                 href="/login"
                 className="inline-block bg-green-500 hover:bg-green-400 text-black font-semibold rounded-xl px-6 py-3 transition-all"
@@ -97,5 +108,19 @@ export default function VerifyEmailPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
